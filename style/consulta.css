@@ -1,0 +1,25 @@
+.consultas-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.consultas-table th,
+.consultas-table td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+  font-size: 14px;
+}
+
+.consultas-table th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+
+.consultas-table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.consultas-table tr:hover {
+  background-color: #ddd;
+}
