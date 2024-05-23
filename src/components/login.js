@@ -1,5 +1,4 @@
 import { GoogleLogin } from "react-google-login";
-import "../style/TopBar.css";
 import AuthContext from "./AuthContext";
 import { useContext } from "react";
 

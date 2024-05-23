@@ -22,12 +22,12 @@ const TopBar = () => {
             {authenticated ? (
               <>
                 <span className="online">Online</span>
-                <Logout />
+                <Logout className="signInButton" />
               </>
             ) : (
               <>
                 <span className="offline">Offline</span>
-                <Login />
+                <Login className="signOutButton" />
               </>
             )}
           </li>

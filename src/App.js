@@ -30,8 +30,8 @@ const App = () => {
           <Routes>
             <Route path="/" element={<DashBoard />} />
             <Route path="/consultas" element={<ConsultaList />} />
-            <Route path="/consultas/new" element={<ConsultaForm />} />
-            <Route path="/consultas/edit/:id" element={<ConsultaForm />} />
+            <Route path="/consultas/new/*" element={<ConsultaForm />} />
+            <Route path="/consultas/edit/:id/*" element={<ConsultaForm />} />
           </Routes>
         </div>
       </Router>

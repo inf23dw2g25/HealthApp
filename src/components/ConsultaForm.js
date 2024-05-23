@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import React, { useState, useEffect, useContext } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import api from "../api";
+import AuthContext from "./AuthContext";
 import "../style/ConsultaForm.css";
 
 // Função utilitária para formatar data e hora
@@ -18,32 +19,22 @@ const formatDateTimeForInput = (dateString) => {
 };
 
 const ConsultaForm = () => {
+  const navigate = useNavigate();
+  const { id } = useParams();
+  const { authToken } = useContext(AuthContext); // Assuming you have a context to provide the auth token
+
   const [consulta, setConsulta] = useState({
     data_e_hora: "",
     paciente_id: "",
     especialista_id: "",
     observacoes: "",
   });
-  const { id } = useParams();
-  const navigate = useNavigate();
-  const token = localStorage.getItem("accessToken"); // Certifique-se de que o token está armazenado corretamente
 
   useEffect(() => {
-    if (!token) {
-      toast.error("Token não encontrado. Por favor, faça login novamente.");
-      navigate("https://accounts.google.com/o/oauth2/auth");
-      return;
-    }
-
     if (id) {
       const fetchData = async () => {
         try {
-          const result = await api.get(`/consultas/${id}`, {
-            headers: {
-              Authorization: `Bearer ${token}`,
-              Accept: "application/json",
-            },
-          });
+          const result = await api.get(`/consultas/${id}`);
           const formattedData = {
             ...result.data,
             data_e_hora: formatDateTimeForInput(result.data.data_e_hora),
@@ -51,12 +42,11 @@ const ConsultaForm = () => {
           setConsulta(formattedData);
         } catch (error) {
           console.error("Error fetching consulta:", error);
-          toast.error("Erro ao buscar consulta.");
         }
       };
       fetchData();
     }
-  }, [id, token, navigate]);
+  }, [id, authToken]);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -69,24 +59,18 @@ const ConsultaForm = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
+      const headers = {
+        Accept: "application/json",
+        Authorization: `Bearer ${authToken}`, // Include the auth token in the headers
+      };
       if (id) {
-        await api.put(`/consultas/${id}`, consulta, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            Accept: "application/json",
-          },
-        });
+        await api.put(`/consultas/${id}`, consulta, { headers });
         toast.success("Consulta editada com sucesso!");
       } else {
-        await api.post("/consultas", consulta, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            Accept: "application/json",
-          },
-        });
+        await api.post("/consultas", consulta, { headers });
         toast.success("Consulta criada com sucesso!");
       }
-      navigate("/");
+      navigate("/consultas");
     } catch (error) {
       console.error("Error saving consulta:", error);
       const errorMessage = error.response
