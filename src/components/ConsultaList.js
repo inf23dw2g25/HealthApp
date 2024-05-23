@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import api from "../api";
+import AuthContext from "./AuthContext";
 import "../style/consulta.css";
 
 const ConsultaList = () => {
+  const { authenticated, setAuthenticated } = useContext(AuthContext);
   const [consultas, setConsultas] = useState([]);
   const [pacientes, setPacientes] = useState({});
   const [especialistas, setEspecialistas] = useState({});
@@ -95,10 +97,17 @@ const ConsultaList = () => {
   return (
     <div className="consulta-list">
       <h1>Consultas</h1>
-      <Link to="/consultas/new" className="new-consulta">
-        Nova Consulta
-      </Link>
-
+      {authenticated ? (
+        <>
+          <Link to="/consultas/new" className="new-consulta">
+            Nova Consulta
+          </Link>
+        </>
+      ) : (
+        <>
+          <p>Autenticação necessária</p>
+        </>
+      )}
       <div className="filters">
         <label>
           Data:
@@ -150,18 +159,26 @@ const ConsultaList = () => {
               <td>{especialistas[consulta.especialista_id]}</td>
               <td>{consulta.observacoes}</td>
               <td>
-                <Link
-                  to={`/consultas/edit/${consulta.id}`}
-                  className="edit-btn"
-                >
-                  Editar
-                </Link>
-                <button
-                  onClick={() => deleteConsulta(consulta.id)}
-                  className="delete-btn"
-                >
-                  Deletar
-                </button>
+                {authenticated ? (
+                  <>
+                    <Link
+                      to={`/consultas/edit/${consulta.id}`}
+                      className="edit-btn"
+                    >
+                      Editar
+                    </Link>
+                    <button
+                      onClick={() => deleteConsulta(consulta.id)}
+                      className="delete-btn"
+                    >
+                      Deletar
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <p>Autenticação necessária</p>
+                  </>
+                )}
               </td>
             </tr>
           ))}
