@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import DashBoard from "./components/DashBoard";
 import ConsultaList from "./components/ConsultaList";
 import ConsultaForm from "./components/ConsultaForm";
+import RelatorioPaciente from "./components/RelatorioPaciente";
 import TopBar from "./components/TopBar";
+import Profile from "./components/Profile";
 import { AuthProvider } from "./components/AuthContext";
-import { useEffect } from "react";
 import { gapi } from "gapi-script";
 import "./index.css"; // Adicionar estilos globais se necessário
 
@@ -21,7 +22,8 @@ const App = () => {
       });
     }
     gapi.load("client:auth2", start);
-  });
+  }, []);
+
   return (
     <AuthProvider>
       <Router>
@@ -32,10 +34,16 @@ const App = () => {
             <Route path="/consultas" element={<ConsultaList />} />
             <Route path="/consultas/new/*" element={<ConsultaForm />} />
             <Route path="/consultas/edit/:id/*" element={<ConsultaForm />} />
+            <Route path="/perfil" element={<Profile />} />
+            <Route
+              path="/relatorio/:numero_de_utente"
+              element={<RelatorioPaciente />}
+            />
           </Routes>
         </div>
       </Router>
     </AuthProvider>
   );
 };
+
 export default App;

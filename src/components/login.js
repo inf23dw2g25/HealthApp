@@ -9,6 +9,10 @@ function Login() {
   const { authenticated, setAuthenticated } = useContext(AuthContext);
   const onSuccess = (res) => {
     localStorage.setItem("profile", res.profileObj);
+    localStorage.setItem("userName", res.profileObj.name);
+    localStorage.setItem("userMail", res.profileObj.email);
+    localStorage.setItem("userImg", res.profileObj.imageUrl);
+    localStorage.setItem("userId", res.profileObj.googleId);
     console.log(
       "LOGIN efectuado com sucesso , usuario atual: ",
       res.profileObj

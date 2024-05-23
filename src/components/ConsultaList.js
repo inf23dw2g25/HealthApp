@@ -167,12 +167,12 @@ const ConsultaList = () => {
                     >
                       Editar
                     </Link>
-                    <button
+                    <Link
                       onClick={() => deleteConsulta(consulta.id)}
                       className="delete-btn"
                     >
-                      Deletar
-                    </button>
+                      Apagar
+                    </Link>
                   </>
                 ) : (
                   <>

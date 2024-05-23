@@ -1,61 +1,57 @@
+/* TopBar.css */
 .top-bar {
   display: flex;
-  justify-content: space-between; /* For aligning items in the top bar */
-  align-items: center; /* For centering items vertically */
-  background-color: #333;
-  color: white;
-  padding: 10px;
-  flex-grow: 1; /* Add this property to make the nav element take up the available space */
-}
-
-nav {
-  flex-grow: 1;
-  flex-basis: 200px;
-  flex-wrap: wrap;
-  justify-content: flex-end; /* Align the nav element to the right side */
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #222427;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 nav ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
+  display: flex;
+  gap: 15px;
 }
 
 nav ul li {
   display: inline;
-  margin-right: 20px;
-  flex-grow: 0; /* Add this property to prevent the nav element from growing */
+  background-color: #064f33;
 }
 
-nav ul li:last-child {
-  margin-right: 0;
+nav ul li a {
+  text-decoration: none;
+  color: #ffffff;
 }
 
-.signInButton, .signOutButton {
-  width: 50px;
-  color: rgb(27, 27, 27);
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.signInButton:hover, .signOutButton:hover {
-  background-color: #797f8c;
+.login-status {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .online {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background-color: green;
-  margin-right: 5px;
+  color: green;
 }
 
 .offline {
-  width: 10px;
-  height: 10px;
+  color: red;
+}
+
+.auth-button {
+  background: none;
+  border: none;
+  color: #007bff;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.profile-image {
   border-radius: 50%;
-  background-color: red;
-  margin-right: 5px;
+  padding-top: 15px;
+  max-width: 50px;
+  max-height: 50px;
+  margin-bottom: 20px;
 }
