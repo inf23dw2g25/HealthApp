@@ -1,25 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import DashBoard from "./components/DashBoard";
+import ConsultaList from "./components/ConsultaList";
+import ConsultaForm from "./components/ConsultaForm";
+import TopBar from "./components/TopBar";
+import GoogleCallback from "./components/GoogleCallback";
+import { AuthProvider } from "./components/AuthContext";
+import "./index.css"; // Adicionar estilos globais se necessário
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <AuthProvider>
+      <Router>
+        <div>
+          <TopBar />
+          <Routes>
+            <Route path="/" element={<DashBoard />} />
+            <Route path="/consultas" element={<ConsultaList />} />
+            <Route path="/consultas/new" element={<ConsultaForm />} />
+            <Route path="/consultas/edit/:id" element={<ConsultaForm />} />
+            <Route path="/google/callback" element={<GoogleCallback />} />
+          </Routes>
+        </div>
+      </Router>
+    </AuthProvider>
   );
-}
-
+};
 export default App;

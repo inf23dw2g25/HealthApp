@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { format } from "date-fns";
 import api from "../api";
 import "../style/consulta.css";
 
@@ -20,7 +19,6 @@ const ConsultaList = () => {
         const consultasResult = await api.get("/consultas");
         const consultas = consultasResult.data;
 
-        // Fetch all patients and specialists
         const pacientesResult = await api.get("/pacientes");
         const especialistasResult = await api.get("/especialistas");
 
@@ -142,7 +140,11 @@ const ConsultaList = () => {
           {filteredConsultas.map((consulta) => (
             <tr key={consulta.id}>
               <td>
-                {format(new Date(consulta.data_e_hora), "yyyy-MM-dd HH:mm")}
+                {consulta.data_e_hora
+                  .replace("T", " ")
+                  .split(":")
+                  .slice(0, 2)
+                  .join(":")}
               </td>
               <td>{pacientes[consulta.paciente_id]}</td>
               <td>{especialistas[consulta.especialista_id]}</td>

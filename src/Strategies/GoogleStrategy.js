@@ -10,7 +10,8 @@ passport.use(
       callbackURL: "http://localhost:3000/google/callback",
     },
     (accessToken, refreshToken, profile, done) => {
-      // Aqui você pode salvar o usuário no banco de dados ou retorná-lo
+      // Aqui você pode salvar o accessToken no localStorage
+      localStorage.setItem("accessToken", accessToken);
       // Chame done() com o usuário ou null se ocorrer um erro
       return done(null, profile);
     }
