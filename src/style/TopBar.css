@@ -22,7 +22,8 @@ nav ul li:last-child {
   margin-right: 0;
 }
 
-button {
+.signInButton
+.signOutButton {
   background-color: #4285f4;
   color: white;
   border: none;
@@ -31,7 +32,8 @@ button {
   transition: background-color 0.3s ease;
 }
 
-button:hover {
+.signInButton:hover
+.signOutButton:hover {
   background-color: #2f5bb7;
 }
 

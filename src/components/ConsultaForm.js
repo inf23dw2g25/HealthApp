@@ -5,6 +5,18 @@ import "react-toastify/dist/ReactToastify.css";
 import api from "../api";
 import "../style/ConsultaForm.css";
 
+// Função utilitária para formatar data e hora
+const formatDateTimeForInput = (dateString) => {
+  const date = new Date(dateString);
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  const hours = String(date.getHours()).padStart(2, "0");
+  const minutes = String(date.getMinutes()).padStart(2, "0");
+
+  return `${year}-${month}-${day}T${hours}:${minutes}`;
+};
+
 const ConsultaForm = () => {
   const [consulta, setConsulta] = useState({
     data_e_hora: "",
@@ -14,20 +26,37 @@ const ConsultaForm = () => {
   });
   const { id } = useParams();
   const navigate = useNavigate();
+  const token = localStorage.getItem("accessToken"); // Certifique-se de que o token está armazenado corretamente
 
   useEffect(() => {
+    if (!token) {
+      toast.error("Token não encontrado. Por favor, faça login novamente.");
+      navigate("https://accounts.google.com/o/oauth2/auth");
+      return;
+    }
+
     if (id) {
       const fetchData = async () => {
         try {
-          const result = await api.get(`/consultas/${id}`);
-          setConsulta(result.data);
+          const result = await api.get(`/consultas/${id}`, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              Accept: "application/json",
+            },
+          });
+          const formattedData = {
+            ...result.data,
+            data_e_hora: formatDateTimeForInput(result.data.data_e_hora),
+          };
+          setConsulta(formattedData);
         } catch (error) {
           console.error("Error fetching consulta:", error);
+          toast.error("Erro ao buscar consulta.");
         }
       };
       fetchData();
     }
-  }, [id]);
+  }, [id, token, navigate]);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -41,15 +70,29 @@ const ConsultaForm = () => {
     event.preventDefault();
     try {
       if (id) {
-        await api.put(`/consultas/${id}`, consulta);
+        await api.put(`/consultas/${id}`, consulta, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            Accept: "application/json",
+          },
+        });
         toast.success("Consulta editada com sucesso!");
       } else {
-        await api.post("/consultas", consulta);
+        await api.post("/consultas", consulta, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            Accept: "application/json",
+          },
+        });
         toast.success("Consulta criada com sucesso!");
       }
       navigate("/");
     } catch (error) {
       console.error("Error saving consulta:", error);
+      const errorMessage = error.response
+        ? `Erro ao salvar consulta: ${error.response.status} - ${error.response.data.message}`
+        : "Erro ao salvar consulta.";
+      toast.error(errorMessage);
     }
   };
 
