@@ -97,17 +97,6 @@ const ConsultaList = () => {
   return (
     <div className="consulta-list">
       <h1>Consultas</h1>
-      {authenticated ? (
-        <>
-          <Link to="/consultas/new" className="new-consulta">
-            Nova Consulta
-          </Link>
-        </>
-      ) : (
-        <>
-          <p>Autenticação necessária</p>
-        </>
-      )}
       <div className="filters">
         <label>
           Data:
@@ -133,6 +122,17 @@ const ConsultaList = () => {
             onChange={(e) => setSearchEspecialista(e.target.value)}
           />
         </label>
+        {authenticated ? (
+          <>
+            <Link to="/consultas/new" className="new-consulta">
+              Nova Consulta
+            </Link>
+          </>
+        ) : (
+          <>
+            <p>Autenticação necessária</p>
+          </>
+        )}
       </div>
 
       <table>

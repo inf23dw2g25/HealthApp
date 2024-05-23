@@ -26,7 +26,7 @@ const TopBar = () => {
             <Link to="/especialistas">Especialistas</Link>
           </li>
           <li>
-            <Link to="/especialidades">especialidades</Link>
+            <Link to="/especialidades">Especialidades</Link>
           </li>
         </ul>
       </nav>

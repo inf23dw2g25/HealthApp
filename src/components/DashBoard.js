@@ -26,7 +26,9 @@ const DashBoard = () => {
           value={searchUtente}
           onChange={(e) => setSearchUtente(e.target.value)}
         />
-        <button onClick={handleSearch}>Pesquisar</button>
+        <Link className="dashboard-link" a onClick={handleSearch}>
+          Pesquisar
+        </Link>
       </div>
 
       <div className="dashboard-links">

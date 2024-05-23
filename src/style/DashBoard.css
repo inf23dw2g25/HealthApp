@@ -19,7 +19,7 @@
 .dashboard-link {
   display: inline-block;
   padding: 15px 30px;
-  background-color: #4CAF50;
+  background-color: #086d2e;
   color: white;
   text-decoration: none;
   border-radius: 5px;
@@ -27,5 +27,14 @@
 }
 
 .dashboard-link:hover {
-  background-color: #45a049;
+  background-color: #8dca90;
+}
+.search-bar input{
+  font-size: 16px;
+}
+
+.pesquisar{
+ font-size: 16px;
+ background-color: #086d2e;
+  color: aliceblue;
 }
