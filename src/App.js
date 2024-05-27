@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import DashBoard from "./components/DashBoard";
 import ConsultaList from "./components/ConsultaList";
 import ConsultaForm from "./components/ConsultaForm";
+import PacienteList from "./components/PacienteList";
+import PacienteForm from "./components/PacienteForm";
 import RelatorioPaciente from "./components/RelatorioPaciente";
 import TopBar from "./components/TopBar";
 import Profile from "./components/Profile";
@@ -34,6 +36,9 @@ const App = () => {
             <Route path="/consultas" element={<ConsultaList />} />
             <Route path="/consultas/new/*" element={<ConsultaForm />} />
             <Route path="/consultas/edit/:id/*" element={<ConsultaForm />} />
+            <Route path="/pacientes" element={<PacienteList />} />
+            <Route path="/pacientes/new/*" element={<PacienteForm />} />
+            <Route path="/pacientes/edit/:id/*" element={<PacienteForm />} />
             <Route path="/perfil" element={<Profile />} />
             <Route
               path="/relatorio/:numero_de_utente"

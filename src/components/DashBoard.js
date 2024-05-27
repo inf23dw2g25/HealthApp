@@ -40,6 +40,14 @@ const DashBoard = () => {
             Nova Consulta
           </Link>
         ) : null}
+        <Link to="/pacientes" className="dashboard-link">
+          Ver Pacientes
+        </Link>
+        {authenticated ? (
+          <Link to="/pacientes/new" className="dashboard-link">
+            Novo Paciente
+          </Link>
+        ) : null}
       </div>
     </div>
   );
