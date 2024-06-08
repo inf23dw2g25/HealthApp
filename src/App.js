@@ -5,6 +5,10 @@ import ConsultaList from "./components/ConsultaList";
 import ConsultaForm from "./components/ConsultaForm";
 import PacienteList from "./components/PacienteList";
 import PacienteForm from "./components/PacienteForm";
+import EspecialistaList from "./components/EspecialistaList";
+import EspecialistaForm from "./components/EspecialistaForm";
+import EspecialidadeList from "./components/EspecialidadeList";
+import EspecialidadeForm from "./components/EspecialidadeForm";
 import RelatorioPaciente from "./components/RelatorioPaciente";
 import TopBar from "./components/TopBar";
 import Profile from "./components/Profile";
@@ -39,6 +43,12 @@ const App = () => {
             <Route path="/pacientes" element={<PacienteList />} />
             <Route path="/pacientes/new/*" element={<PacienteForm />} />
             <Route path="/pacientes/edit/:id/*" element={<PacienteForm />} />
+            <Route path="/especialistas" element={<EspecialistaList />} />
+            <Route path="/especialistas/new/*" element={<EspecialistaForm />} />
+            <Route path="/especialistas/edit/:id/*" element={<EspecialistaForm />} />
+            <Route path="/especialidades" element={<EspecialidadeList />} />
+            <Route path="/especialidades/new/*" element={<EspecialidadeForm />} />
+            <Route path="/especialidades/edit/:id/*" element={<EspecialidadeForm />} />
             <Route path="/perfil" element={<Profile />} />
             <Route
               path="/relatorio/:numero_de_utente"

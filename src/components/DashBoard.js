@@ -48,6 +48,22 @@ const DashBoard = () => {
             Novo Paciente
           </Link>
         ) : null}
+         <Link to="/especialidades" className="dashboard-link">
+          Ver Especialidades
+        </Link>
+        {authenticated ? (
+          <Link to="/especialidades/new" className="dashboard-link">
+            Nova Especialidade
+          </Link>
+        ) : null}
+         <Link to="/especialistas" className="dashboard-link">
+          Ver Especialistas
+        </Link>
+        {authenticated ? (
+          <Link to="/especialistas/new" className="dashboard-link">
+            Novo Especialista
+          </Link>
+        ) : null}
       </div>
     </div>
   );
